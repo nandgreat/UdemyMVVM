@@ -3,19 +3,24 @@ package com.nandom.udemymvvm
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import com.nandom.udemymvvm.R
+import androidx.lifecycle.ViewModelProvider
 import com.nandom.udemymvvm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainActivityViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.student = getStudent()
-    }
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-    private fun getStudent(): Student {
-        return Student(1,"Nandom","paul4nank@gmail.com")
+
+        binding.countText.text = viewModel.getCurrentcount().toString()
+
+        binding.button.setOnClickListener {
+            binding.countText.text = viewModel.getUpdatedCount().toString()
+        }
     }
 }
