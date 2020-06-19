@@ -1,19 +1,19 @@
 package com.nandom.udemymvvm
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.ViewModel
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel(startingTotal: Int) : ViewModel() {
+    private var total = 0
 
-    private var count = 0
-
-    fun getCurrentcount(): Int {
-        return count
+    init {
+        total  = startingTotal
     }
 
-    fun addToSum(number: Int) {
-        Log.d(TAG, "addToSum: ${number}")
-         count += number
+    fun getTotal(): Int {
+        return total
+    }
+
+    fun setTotal(input: Int) {
+        total += input
     }
 }
