@@ -16,11 +16,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-
-        binding.countText.text = viewModel.getCurrentcount().toString()
+        binding.sumText.text = viewModel.getCurrentcount().toString()
 
         binding.button.setOnClickListener {
-            binding.countText.text = viewModel.getUpdatedCount().toString()
+            viewModel.addToSum(binding.etNumber.text.toString().toInt())
+           binding.sumText.text = viewModel.getCurrentcount().toString()
         }
     }
 }
